@@ -78,9 +78,8 @@ namespace IdentityServerHecules
                 .AddConfigurationStore(options =>
                 {
                     options.ConfigureDbContext = builder =>
-                        builder.UseNpgsql(connectionString, opt =>
+                        builder.UseSqlServer(connectionString, opt =>
                         {
-                            opt.SetPostgresVersion(new Version(9, 6));
                             opt.MigrationsAssembly(migrationsAssembly);
                         }
                         );
@@ -89,9 +88,8 @@ namespace IdentityServerHecules
                 .AddOperationalStore(options =>
                 {
                     options.ConfigureDbContext = builder =>
-                        builder.UseNpgsql(connectionString, opt =>
+                        builder.UseSqlServer(connectionString, opt =>
                         {
-                            opt.SetPostgresVersion(new Version(9, 6));
                             opt.MigrationsAssembly(migrationsAssembly);
                         }
                         );

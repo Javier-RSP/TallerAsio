@@ -95,18 +95,16 @@ namespace GestorDocumentacion
                 options.OperationFilter<SecurityRequirementsOperationFilter>();
             });
 
-            services.AddEntityFrameworkNpgsql().AddDbContext<EntityContext>(opt =>
+            services.AddEntityFrameworkSqlServer().AddDbContext<EntityContext>(opt =>
             {
-                var builder = new NpgsqlDbContextOptionsBuilder(opt);
-                builder.SetPostgresVersion(new Version(9, 6));
                 IDictionary environmentVariables = Environment.GetEnvironmentVariables();
                 if (environmentVariables.Contains("PostgreConnectionmigration"))
                 {
-                    opt.UseNpgsql(environmentVariables["PostgreConnectionmigration"] as string);
+                    opt.UseSqlServer(environmentVariables["PostgreConnectionmigration"] as string);
                 }
                 else
                 {
-                    opt.UseNpgsql(Configuration.GetConnectionString("PostgreConnectionmigration"));
+                    opt.UseSqlServer(Configuration.GetConnectionString("PostgreConnectionmigration"));
                 }
 
 
